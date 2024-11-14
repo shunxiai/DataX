@@ -28,6 +28,10 @@ public class MysqlWriter extends Writer {
         public void init() {
             this.originalConfig = super.getPluginJobConf();
             this.commonRdbmsWriterJob = new CommonRdbmsWriter.Job(DATABASE_TYPE);
+
+            // 自动建表
+            MysqlAutoCreateTable.createTable(getPeerPluginJobConf(), originalConfig);
+
             this.commonRdbmsWriterJob.init(this.originalConfig);
         }
 
